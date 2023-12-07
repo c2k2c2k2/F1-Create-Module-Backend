@@ -4,31 +4,22 @@ const { Schema } = mongoose;
 
 const formEntrySchema = new Schema(
     {
-        // type: {
-        //     type: String,
-        //     required: true,
-        //     enum: ["Text", "Text Area", "DropDown", "Check Box", "Radio Button"]
-        // },
-        // label: {
-        //     type: String,
-        //     required: true,
-        // },
-        // isMandatory: {
-        //     type: Boolean,
-        //     required: true,
-        //     default: false,
-        // },
-        // defaultValue: {
-        //     type: String,
-        //     required: false
-        // },
-        // block: {
-        //     type: mongoose.Schema.Types.ObjectId,
-        //     ref: "Block",
-        // },
+        module: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Module",
+        },
+        blocks: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Block",
+        }],
+        formData: {
+            type: Object,
+        }
+
     },
     { timestamps: true }
 );
+
 
 const FormEntry = mongoose.model("FormEntry", formEntrySchema);
 

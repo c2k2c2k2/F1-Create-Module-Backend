@@ -8,7 +8,6 @@ const moduleSchema = new Schema(
             type: String,
             required: true,
         },
-
         blocks: [
             {
                 type: mongoose.Schema.Types.ObjectId,

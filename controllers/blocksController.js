@@ -29,7 +29,7 @@ exports.createBlock = AsyncHandler(async (req, res) => {
 //@desc Get all blocks
 //@route GET /blocks
 exports.getBlocks = AsyncHandler(async (req, res) => {
-    const blocks = await Block.find().populate('module');
+    const blocks = await Block.find().populate('module').populate('fields');
 
     res.status(201).json({
         status: "success",
@@ -41,7 +41,7 @@ exports.getBlocks = AsyncHandler(async (req, res) => {
 //@desc Get single block
 //@route GET /blocks/:id
 exports.getBlock = AsyncHandler(async (req, res) => {
-    const block = await Block.findById(req.params.id).populate('module');
+    const block = await Block.findById(req.params.id).populate('module').populate('fields');
 
     res.status(201).json({
         status: "success",

@@ -28,7 +28,8 @@ exports.createModule = AsyncHandler(async (req, res) => {
 //@desc Get all modules
 //@route GET /modules
 exports.getModules = AsyncHandler(async (req, res) => {
-    const modules = await Module.find();
+   
+    const modules = await Module.find().populate("blocks");
 
     res.status(201).json({
         status: "success",
@@ -40,7 +41,7 @@ exports.getModules = AsyncHandler(async (req, res) => {
 //@desc Get single module
 //@route GET /modules/:id
 exports.getModule = AsyncHandler(async (req, res) => {
-    const module = await Module.findById(req.params.id);
+    const module = await Module.findById(req.params.id).populate('blocks');
 
     res.status(201).json({
         status: "success",
@@ -53,30 +54,28 @@ exports.getModule = AsyncHandler(async (req, res) => {
 //@route  PUT /api/v1/modules/:id
 //@acess  Private
 exports.updateModule = AsyncHandler(async (req, res) => {
-    // const { name, blocks } = req.body;
+    const { name, blocks } = req.body;
     // //check name exists
-    // const moduleFound = await Module.findOne({ name });
-    // if (moduleFound) {
-    //     throw new Error("Subject already exists");
-    // }
-    // const subject = await Subject.findByIdAndUpdate(
-    //     req.params.id,
-    //     {
-    //         name,
-    //         description,
-    //         academicTerm,
-    //         createdBy: req.userAuth._id,
-    //     },
-    //     {
-    //         new: true,
-    //     }
-    // );
+    const moduleFound = await Module.findOne({ name });
+    if (moduleFound) {
+        throw new Error("Module already exists");
+    }
+    const module = await Module.findByIdAndUpdate(
+        req.params.id,
+        {
+            name,
+            blocks
+        },
+        {
+            new: true,
+        }
+    );
 
-    // res.status(200).json({
-    //     status: "success",
-    //     message: "Subject updated successfully",
-    //     data: subject,
-    // });
+    res.status(200).json({
+        status: "success",
+        message: "Module updated successfully",
+        data: module,
+    });
 });
 
 //@desc Delete module
