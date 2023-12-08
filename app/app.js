@@ -1,8 +1,9 @@
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
 const {
-    globalErrorHandler,
-    notFoundError,
+  globalErrorHandler,
+  notFoundError,
 } = require("../middlewares/globalErrorHandler");
 
 const moduleRouter = require("../routes/module");
@@ -11,6 +12,7 @@ const customFieldRouter = require("../routes/customField");
 const formEntryRouter = require("../routes/formEntry");
 
 const app = express();
+app.use(cors());
 
 //middlewares
 app.use(morgan("dev"));
@@ -21,7 +23,6 @@ app.use("/api/v1/modules", moduleRouter);
 app.use("/api/v1/blocks", blockRouter);
 app.use("/api/v1/custom-fields", customFieldRouter);
 app.use("/api/v1/form-entries", formEntryRouter);
-
 
 //error handler middlewares
 app.use(notFoundError);
