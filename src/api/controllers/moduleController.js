@@ -15,7 +15,7 @@ const fieldSchema = Joi.object({
 const blockSchema = Joi.object({
   name: Joi.string().required(),
   addAfter: Joi.string().required(),
-  fields: Joi.array().items(fieldSchema).required()
+  fields: Joi.array().items(fieldSchema)
 });
 
 // Root validation schema
