@@ -7,7 +7,9 @@ const formEntryModel = new FormEntryModel();
 //validation schema for FormEntry
 const createFormEntrySchema = Joi.object({
     moduleId: Joi.string().required(),
-    formData: Joi.object().required
+    formData: Joi.object().required(),
+    createdAt: Joi.date(),
+    updatedAt: Joi.date(),
 })
 
 
