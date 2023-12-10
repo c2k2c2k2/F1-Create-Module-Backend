@@ -7,6 +7,7 @@ const moduleModel = new ModuleModel();
 const fieldSchema = Joi.object({
   type: Joi.string().required(),
   label: Joi.string().required(),
+  options : Joi.array().items(Joi.string()),
   isMandatory: Joi.boolean().required(),
   defaultValue: Joi.string().required()
 });
