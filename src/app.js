@@ -7,6 +7,7 @@ const db = require('./config/db');
 
 const moduleRouter = require("./api/routes/moduleRoutes");
 const formEntryRouter = require('./api/routes/formEntryRoutes');
+const authRouter = require('./api/routes/authRoutes');
 
 const app = express();
 app.use(morgan('dev'));
@@ -18,6 +19,7 @@ db.connectToServer();
 // Register routes
 app.use("/api/v1/modules", moduleRouter);
 app.use("/api/v1/form-entries", formEntryRouter);
+app.use("/api/v1/auth", authRouter);
 
 //error handler middlewares
 app.use(notFoundError);
